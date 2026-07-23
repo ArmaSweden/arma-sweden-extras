@@ -7,4 +7,5 @@ addon in the addon folder that you want to use.
 
 All addons are developed by [Avokadomos](https://github.com/Avokadomos), except in the following cases:
 
-**[ase_patches](https://github.com/ArmaSweden/Arma-Sweden-Extras/tree/main/addons/ase_patches)** is developed by [Kingtiger45](https://github.com/Kingtiger45).
+- [ase_patches](https://github.com/ArmaSweden/Arma-Sweden-Extras/tree/main/addons/ase_patches) is developed by [Kingtiger45](https://github.com/Kingtiger45).
+- [ksp58_weight_fix](https://github.com/ArmaSweden/arma-sweden-extras/tree/development/addons/ase_ksp58_weight_fix) is developed by Anctus.
