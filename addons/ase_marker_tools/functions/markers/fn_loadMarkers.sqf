@@ -24,7 +24,7 @@ _markers = profileNamespace getVariable "ASE_savedMarkers";
 		if ([parseNumber _channelId] call ASE_fnc_isChannelRestricted) then { continue };
 
 		_marker = createMarkerLocal [
-			format ["_USER_DEFINED #%1/%2/%3", getPlayerID player, _markerId, _channelId],
+			format ["_USER_DEFINED #%1/ASE%2/%3", getPlayerID player, _markerId, _channelId],
 			[0, 0],
 			parseNumber _channelId,
 			player
@@ -58,7 +58,7 @@ _markers = profileNamespace getVariable "ASE_savedMarkers";
 		if ([parseNumber _channelId] call ASE_fnc_isChannelRestricted) then { continue };
 
 		_marker = createMarkerLocal [
-			format ["_USER_DEFINED #%1/%2/%3", getPlayerID player, _markerId, _channelId],
+			format ["_USER_DEFINED #%1/ASE%2/%3", getPlayerID player, _markerId, _channelId],
 			parseSimpleArray _pos,
 			parseNumber _channelId,
 			player
