@@ -7,7 +7,7 @@ if (count allMapMarkers == 0) exitWith {};
 	if (!(["_USER_DEFINED", _x, true] call BIS_fnc_inString)) then {continue};
 
 	_markerName = _x;
-	_playerID = (_x splitString "#/") select 1;
+	_playerId = (_x splitString "#/") select 1;
 
 	// Save to side channel if singleplayer
 	if (!isMultiplayer) then {
@@ -15,7 +15,7 @@ if (count allMapMarkers == 0) exitWith {};
 	};
 
 	// Marker must be owned by the player
-	if (_playerID != getPlayerID player) then { continue };
+	if (_playerId != getPlayerID player) then { continue };
 
 	if (markerShape _x == "POLYLINE") then {
 		_markers pushBack ([

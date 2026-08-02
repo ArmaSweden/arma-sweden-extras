@@ -12,21 +12,21 @@ _markers = profileNamespace getVariable "ASE_savedMarkers";
 		_name splitString "#/" params [
 			"",
 			"",
-			"_markerID",
-			"_channelID"
+			"_markerId",
+			"_channelId"
 		];
 
 		// Group channel is the default in singleplayer
 		if (!isMultiplayer) then {
-			_channelID = "3";
+			_channelId = "3";
 		};
 
-		if ([parseNumber _channelID] call ASE_fnc_isChannelRestricted) then { continue };
+		if ([parseNumber _channelId] call ASE_fnc_isChannelRestricted) then { continue };
 
 		_marker = createMarkerLocal [
-			format ["_USER_DEFINED #%1/%2/%3", getPlayerID player, _markerID, _channelID],
+			format ["_USER_DEFINED #%1/ASE%2/%3", getPlayerID player, _markerId, _channelId],
 			[0, 0],
-			parseNumber _channelID,
+			parseNumber _channelId,
 			player
 		];
 		_marker setMarkerPolylineLocal parseSimpleArray _path;
@@ -46,21 +46,21 @@ _markers = profileNamespace getVariable "ASE_savedMarkers";
 		_name splitString "#/" params [
 			"",
 			"",
-			"_markerID",
-			"_channelID"
+			"_markerId",
+			"_channelId"
 		];
 
 		// Group channel is the default in singleplayer
 		if (!isMultiplayer) then {
-			_channelID = "3";
+			_channelId = "3";
 		};
 
-		if ([parseNumber _channelID] call ASE_fnc_isChannelRestricted) then { continue };
+		if ([parseNumber _channelId] call ASE_fnc_isChannelRestricted) then { continue };
 
 		_marker = createMarkerLocal [
-			format ["_USER_DEFINED #%1/%2/%3", getPlayerID player, _markerID, _channelID],
+			format ["_USER_DEFINED #%1/ASE%2/%3", getPlayerID player, _markerId, _channelId],
 			parseSimpleArray _pos,
-			parseNumber _channelID,
+			parseNumber _channelId,
 			player
 		];
 		_marker setMarkerTypeLocal _type;

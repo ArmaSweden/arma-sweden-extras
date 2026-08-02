@@ -4,7 +4,7 @@
 
 _logic = param [0,objNull,[objNull]];
 _units = param [1,[],[[]]];
-_activated = param [2,false,[true]];
+_isActivated = param [2,false,[true]];
 
 _side = _logic getVariable ["Side", 0];
 _name = _logic getVariable ["Name", ""];
@@ -24,7 +24,7 @@ _disableModule = {
 	_logic setVariable ["marker", ""];
 };
 
-if (_activated) then {
+if (_isActivated) then {
 	if (_logic getVariable ["isEnabled", false]) exitWith {
 		_logic setVariable ["endTime", time + _activeTime];
 	};

@@ -2,11 +2,11 @@ _interval = param [0, 0, [0]];
 
 // Round to nearest interval
 _newViewDistance = viewDistance + _interval;
-_interval = abs _interval;
-_newViewDistance = _newViewDistance / _interval;
+_absInterval = abs _interval;
+_newViewDistance = _newViewDistance / _absInterval;
 _newViewDistance = round _newViewDistance;
-_newViewDistance = _newViewDistance * _interval;
-_newViewDistance = [_newViewDistance, _interval, 12000] call BIS_fnc_clamp;
+_newViewDistance = _newViewDistance * _absInterval;
+_newViewDistance = [_newViewDistance, _absInterval, 12000] call BIS_fnc_clamp;
 
 setViewDistance _newViewDistance;
 

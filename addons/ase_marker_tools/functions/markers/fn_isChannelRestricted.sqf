@@ -1,4 +1,4 @@
-params ["_channelID"];
+params ["_channelId"];
 
 if (!isMultiplayer) exitWith { false };
 
@@ -15,8 +15,8 @@ _isChannelRestricted = [
 	ASE_setting_markerTools_disablePlacementDirect
 ];
 
-if (_channelID == -1 || _channelID > 5) exitWith {
+if (_channelId == -1 || _channelId > 5) exitWith {
 	false
 };
 
-_isChannelRestricted select _channelID
+_isChannelRestricted select _channelId
