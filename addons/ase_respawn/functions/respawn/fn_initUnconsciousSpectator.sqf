@@ -45,9 +45,14 @@ if (_state) then {
 
 		_spectatorFocus = uiNamespace getVariable ["RscEGSpectator_focus", objNull];
 		localNamespace setVariable ["ASE_spectatorFocus", _spectatorFocus];
-		if (_spectatorFocus == player && isClass(configFile >> "CfgPatches" >> "tfar_core")) then {
-			// Make radio audible when spectating self
-			[player, false] call TFAR_fnc_forceSpectator;
+
+		// Disable voice and radio transmission while unconscious
+		if (isClass(configFile >> "CfgPatches" >> "tfar_core")) then {
+			// Save current voice volume and set to 0 to prevent local speech
+			localNamespace setVariable ["ASE_unconsciousVoiceVolume", TF_speak_volume_meters];
+			0 call TFAR_fnc_setVoiceVolume;
+			// Disable radio transmission
+			[player, true] call TFAR_fnc_forceSpectator;
 		};
 
 		_display = "GetDisplay" call BIS_fnc_EGSpectator;
@@ -68,6 +73,11 @@ if (_state) then {
 
 			if (isNull _spectatorFocus || !alive player) exitWith {
 				removeMissionEventHandler ["EachFrame", _thisEventHandler];
+				// Restore voice/radio if player died while unconscious
+				if (!alive player && isClass(configFile >> "CfgPatches" >> "tfar_core")) then {
+					(localNamespace getVariable ["ASE_unconsciousVoiceVolume", 20]) call TFAR_fnc_setVoiceVolume;
+					[player, false] call TFAR_fnc_forceSpectator;
+				};
 			};
 			
 			// Only third person allowed when spectating self
@@ -77,13 +87,6 @@ if (_state) then {
 
 			// Spectator focus changed
 			if (_spectatorFocus != localNamespace getVariable ["ASE_spectatorFocus", objNull]) then {
-				if (isClass(configFile >> "CfgPatches" >> "tfar_core")) then {
-					if (_spectatorFocus == player) then {
-						[player, false] call TFAR_fnc_forceSpectator;
-					} else {
-						[player, true] call TFAR_fnc_forceSpectator;
-					};
-				};
 				localNamespace setVariable ["ASE_spectatorFocus", _spectatorFocus];
 			};
 		}, [_display]];
