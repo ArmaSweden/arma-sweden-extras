@@ -69,16 +69,17 @@ if (_state) then {
 		}];
 
 		_eventHandler = addMissionEventHandler ["EachFrame", {
-			_spectatorFocus = uiNamespace getVariable ["RscEGSpectator_focus", objNull];
-
-			if (isNull _spectatorFocus || !alive player) exitWith {
+			// Clean up if player died while unconscious
+			if (!alive player) exitWith {
 				removeMissionEventHandler ["EachFrame", _thisEventHandler];
-				// Restore voice/radio if player died while unconscious
-				if (!alive player && isClass(configFile >> "CfgPatches" >> "tfar_core")) then {
+				if (isClass(configFile >> "CfgPatches" >> "tfar_core")) then {
 					(localNamespace getVariable ["ASE_unconsciousVoiceVolume", 20]) call TFAR_fnc_setVoiceVolume;
 					[player, false] call TFAR_fnc_forceSpectator;
 				};
 			};
+
+			_spectatorFocus = uiNamespace getVariable ["RscEGSpectator_focus", objNull];
+			if (isNull _spectatorFocus) exitWith {}; // Skip frame if focus is null (e.g., unit disconnected)
 			
 			// Only third person allowed when spectating self
 			if (_spectatorFocus == player && "GetCameraMode" call BIS_fnc_EGSpectatorCamera != "follow") then {
